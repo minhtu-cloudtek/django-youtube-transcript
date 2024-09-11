@@ -1,8 +1,15 @@
-"""
-URL configuration for example_django project.
+from django.http import HttpResponse
+
+from youtube_transcript_api import YouTubeTranscriptApi
+
+def get_youtube_transcript(request, video_id):
+    transcript = YouTubeTranscriptApi.get_transcript(video_id)
+    return HttpResponse(transcript)
+
+"""site1 URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+    https://docs.djangoproject.com/en/4.0/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -19,4 +26,5 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('get-youtube-transcript/<str:video_id>/', get_youtube_transcript),
 ]
